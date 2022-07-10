@@ -1,34 +1,34 @@
-package com.example.moim.dto;
+package com.example.moim.domain;
 
-import com.example.moim.domain.Gender;
-import com.example.moim.domain.Member;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
-public class HostResponse {
+@Entity
+public class Member {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private LocalDate dateOfBirth;
     private Gender gender;
     private String userID;
+    private String password;
     private String email;
     private String company;
 
-    public static HostResponse of(Member member) {
-        return new HostResponse(member.getId(), member.getName(), member.getDateOfBirth(),
-                member.getGender(), member.getUserID(), member.getEmail(), member.getCompany());
+    public Member() {
     }
 
-    public HostResponse() {
-    }
-
-    public HostResponse(Long id, String name, LocalDate dateOfBirth, Gender gender,
-                        String userID, String email, String company) {
-        this.id = id;
+    public Member(String name, LocalDate dateOfBirth, Gender gender, String userID,
+                  String password, String email, String company) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.userID = userID;
+        this.password = password;
         this.email = email;
         this.company = company;
     }
@@ -51,6 +51,10 @@ public class HostResponse {
 
     public String getUserID() {
         return userID;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getEmail() {
