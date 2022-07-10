@@ -13,10 +13,24 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // web
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // jpa
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // database
     runtimeOnly 'com.h2database:h2'
+
+    // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // acceptance
+    testImplementation 'io.rest-assured:rest-assured:3.3.0'
+
+    // guava
+    implementation 'com.google.guava:guava:11.0.2'
+
 }
 
 tasks.named('test') {
