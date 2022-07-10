@@ -54,6 +54,6 @@ public class AcceptanceTest {
                 .then().log().all()
                 .extract();
 
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED);
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
     }
 }
