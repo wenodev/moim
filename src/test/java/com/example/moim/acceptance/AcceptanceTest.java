@@ -56,4 +56,25 @@ public class AcceptanceTest {
 
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
     }
+
+    /**
+     * WHEN 참여자가 회원정보를 요청하면
+     * THEN 저장한다
+     */
+    @Test
+    void 참여자_회원_가입() {
+        HostRequest request = new HostRequest(
+                "참여자", LocalDate.now(), Gender.MALE, "participant",
+                "password", "weno@next.com", "next"
+        );
+
+        ExtractableResponse<Response> response = given().log().all()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(request)
+                .when().post("/participant")
+                .then().log().all()
+                .extract();
+
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+    }
 }
