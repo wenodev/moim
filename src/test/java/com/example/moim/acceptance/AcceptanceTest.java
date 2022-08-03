@@ -3,6 +3,7 @@ package com.example.moim.acceptance;
 import com.example.moim.acceptance.utils.DatabaseCleanup;
 import com.example.moim.domain.Gender;
 import com.example.moim.dto.HostRequest;
+import com.example.moim.dto.ParticipantRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -63,9 +65,9 @@ public class AcceptanceTest {
      */
     @Test
     void 참여자_회원_가입() {
-        HostRequest request = new HostRequest(
+        ParticipantRequest request = new ParticipantRequest(
                 "참여자", LocalDate.now(), Gender.MALE, "participant",
-                "password", "weno@next.com", "next"
+                "password", "weno@next.com", List.of("후추", "돼지고기"), "안녕하세요"
         );
 
         ExtractableResponse<Response> response = given().log().all()

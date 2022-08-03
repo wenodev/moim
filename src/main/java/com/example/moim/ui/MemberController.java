@@ -3,6 +3,8 @@ package com.example.moim.ui;
 import com.example.moim.application.MemberService;
 import com.example.moim.dto.HostRequest;
 import com.example.moim.dto.HostResponse;
+import com.example.moim.dto.ParticipantRequest;
+import com.example.moim.dto.ParticipantResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,4 +26,9 @@ public class MemberController {
         return ResponseEntity.created(URI.create("/host/" + response.getId())).build();
     }
 
+    @PostMapping("/participant")
+    public ResponseEntity<ParticipantResponse> createParticipant(@RequestBody ParticipantRequest request) {
+        ParticipantResponse response = memberService.createParticipant(request);
+        return ResponseEntity.created(URI.create("/participant/" + response.getId())).build();
+    }
 }

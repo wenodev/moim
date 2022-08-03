@@ -5,6 +5,8 @@ import com.example.moim.domain.Member;
 import com.example.moim.domain.MemberRepository;
 import com.example.moim.dto.HostRequest;
 import com.example.moim.dto.HostResponse;
+import com.example.moim.dto.ParticipantRequest;
+import com.example.moim.dto.ParticipantResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -33,12 +36,30 @@ class MemberServiceTest {
                 "주최자1", LocalDate.now(), Gender.MALE, "host",
                 "password", "weno@next.com", "next");
 
-        Member member = new Member("주최자1", LocalDate.now(), Gender.MALE, "host",
+        Member member = Member.createHost("주최자1", LocalDate.now(), Gender.MALE, "host",
                 "password", "weno@next.com", "next");
 
         given(memberRepository.save(any(Member.class))).willReturn(member);
 
         HostResponse response = memberService.createHost(request);
+
+        assertThat(response.getName()).isEqualTo("주최자1");
+    }
+
+    @DisplayName("주최자 회원가입 한다.")
+    @Test
+    void createParticipant() {
+        ParticipantRequest request = new ParticipantRequest(
+                "참여자", LocalDate.now(), Gender.MALE, "participant",
+                "password", "weno@next.com", List.of("후추", "돼지고기"), "안녕하세요"
+        );
+
+        Member member = Member.createParticipant("주최자1", LocalDate.now(), Gender.MALE, "host",
+                "password", "weno@next.com", List.of("후추", "돼지고기"), "안녕하세요");
+
+        given(memberRepository.save(any(Member.class))).willReturn(member);
+
+        ParticipantResponse response = memberService.createParticipant(request);
 
         assertThat(response.getName()).isEqualTo("주최자1");
     }

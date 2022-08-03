@@ -1,10 +1,12 @@
 package com.example.moim.domain;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -18,8 +20,29 @@ public class Member {
     private String password;
     private String email;
     private String company;
+    private String introduction;
+    @Embedded
+    private Ingredients ingredients;
 
-    public Member() {
+    public static Member createHost(String name, LocalDate dateOfBirth, Gender gender, String userID,
+                                    String password, String email, String company) {
+        return new Member(name, dateOfBirth, gender, userID, password, email, company);
+    }
+
+    public static Member createParticipant(String name, LocalDate dateOfBirth, Gender gender, String userID,
+                                           String password, String email, List<String> ingredients, String introduction) {
+        return new Member(name, dateOfBirth, gender, userID, password, email, ingredients, introduction);
+    }
+
+    public Member(String name, LocalDate dateOfBirth, Gender gender, String userID, String password, String email, List<String> ingredients, String introduction) {
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.userID = userID;
+        this.password = password;
+        this.email = email;
+        this.ingredients = new Ingredients(ingredients);
+        this.introduction = introduction;
     }
 
     public Member(String name, LocalDate dateOfBirth, Gender gender, String userID,
@@ -31,6 +54,9 @@ public class Member {
         this.password = password;
         this.email = email;
         this.company = company;
+    }
+
+    public Member() {
     }
 
     public Long getId() {
@@ -63,5 +89,13 @@ public class Member {
 
     public String getCompany() {
         return company;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public Ingredients getIngredients() {
+        return ingredients;
     }
 }
