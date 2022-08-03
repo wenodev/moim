@@ -1,9 +1,12 @@
 package com.example.moim.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Ingredient {
@@ -11,6 +14,10 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @JoinColumn(name = "fk_ingredient_member")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member member;
 
     protected Ingredient() {
     }

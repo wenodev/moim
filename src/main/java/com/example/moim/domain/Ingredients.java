@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Embeddable
 @Access(AccessType.FIELD)
 public class Ingredients {
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Ingredient> values = new ArrayList<>();
 
     protected Ingredients() {
