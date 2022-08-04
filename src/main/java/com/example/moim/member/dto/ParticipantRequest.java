@@ -9,7 +9,7 @@ public class ParticipantRequest {
     private String name;
     private LocalDate dateOfBirth;
     private Gender gender;
-    private String userID;
+    private String memberId;
     private String password;
     private String email;
     private List<String> ingredients;
@@ -20,7 +20,7 @@ public class ParticipantRequest {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
-        this.userID = userID;
+        this.memberId = userID;
         this.password = password;
         this.email = email;
         this.ingredients = ingredients;
@@ -42,8 +42,8 @@ public class ParticipantRequest {
         return gender;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getMemberId() {
+        return memberId;
     }
 
     public String getPassword() {

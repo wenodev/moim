@@ -16,7 +16,7 @@ public class HostResponse {
 
     public static HostResponse of(Member member) {
         return new HostResponse(member.getId(), member.getName(), member.getDateOfBirth(),
-                member.getGender(), member.getUserID(), member.getEmail(), member.getCompany());
+                member.getGender(), member.getMemberId(), member.getEmail(), member.getCompany());
     }
 
     public HostResponse() {

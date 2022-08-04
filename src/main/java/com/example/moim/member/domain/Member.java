@@ -1,5 +1,9 @@
 package com.example.moim.member.domain;
 
+import com.example.moim.common.ErrorMessage;
+import com.example.moim.common.NotMatchException;
+import com.example.moim.utils.CipherGenerator;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +20,7 @@ public class Member {
     private String name;
     private LocalDate dateOfBirth;
     private Gender gender;
-    private String userID;
+    private String memberId;
     private String password;
     private String email;
     private String company;
@@ -34,23 +38,23 @@ public class Member {
         return new Member(name, dateOfBirth, gender, userID, password, email, ingredients, introduction);
     }
 
-    public Member(String name, LocalDate dateOfBirth, Gender gender, String userID, String password, String email, List<String> ingredients, String introduction) {
+    public Member(String name, LocalDate dateOfBirth, Gender gender, String memberID, String password, String email, List<String> ingredients, String introduction) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
-        this.userID = userID;
+        this.memberId = memberID;
         this.password = password;
         this.email = email;
         this.ingredients = new Ingredients(ingredients);
         this.introduction = introduction;
     }
 
-    public Member(String name, LocalDate dateOfBirth, Gender gender, String userID,
+    public Member(String name, LocalDate dateOfBirth, Gender gender, String memberID,
                   String password, String email, String company) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
-        this.userID = userID;
+        this.memberId = memberID;
         this.password = password;
         this.email = email;
         this.company = company;
@@ -75,8 +79,8 @@ public class Member {
         return gender;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getMemberId() {
+        return memberId;
     }
 
     public String getPassword() {
@@ -97,5 +101,11 @@ public class Member {
 
     public Ingredients getIngredients() {
         return ingredients;
+    }
+
+    public void checkPassword(String password) {
+        if (!this.password.equals(CipherGenerator.encode(password))) {
+            throw new NotMatchException(ErrorMessage.PASSWORD_NOT_MATCH);
+        }
     }
 }

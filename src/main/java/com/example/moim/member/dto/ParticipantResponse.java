@@ -19,7 +19,7 @@ public class ParticipantResponse {
 
     public static ParticipantResponse of(Member member) {
         return new ParticipantResponse(member.getId(), member.getName(), member.getDateOfBirth(), member.getGender(),
-                member.getUserID(), member.getEmail(), Ingredients.convertString(member.getIngredients()), member.getIntroduction());
+                member.getMemberId(), member.getEmail(), Ingredients.convertString(member.getIngredients()), member.getIntroduction());
     }
 
     public ParticipantResponse(Long id, String name, LocalDate dateOfBirth, Gender gender, String userID, String email,

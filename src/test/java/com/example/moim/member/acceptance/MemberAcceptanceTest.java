@@ -28,12 +28,7 @@ public class MemberAcceptanceTest extends AcceptanceTest {
                 "password", "weno@next.com", "next"
         );
 
-        ExtractableResponse<Response> response = given().log().all()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(request)
-                .when().post("/host")
-                .then().log().all()
-                .extract();
+        ExtractableResponse<Response> response = 주회자_회원가입_요청(request);
 
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
     }
@@ -49,13 +44,28 @@ public class MemberAcceptanceTest extends AcceptanceTest {
                 "password", "weno@next.com", List.of("후추", "돼지고기"), "안녕하세요"
         );
 
+        ExtractableResponse<Response> response = 참여자_회원가입_요청(request);
+
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+    }
+
+    public static ExtractableResponse<Response> 주회자_회원가입_요청(HostRequest request) {
+        ExtractableResponse<Response> response = given().log().all()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(request)
+                .when().post("/host")
+                .then().log().all()
+                .extract();
+        return response;
+    }
+
+    public static ExtractableResponse<Response> 참여자_회원가입_요청(ParticipantRequest request) {
         ExtractableResponse<Response> response = given().log().all()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(request)
                 .when().post("/participant")
                 .then().log().all()
                 .extract();
-
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+        return response;
     }
 }
