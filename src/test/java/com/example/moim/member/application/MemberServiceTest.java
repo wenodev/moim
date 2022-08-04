@@ -1,12 +1,13 @@
-package com.example.moim.application;
+package com.example.moim.member.application;
 
-import com.example.moim.domain.Gender;
-import com.example.moim.domain.Member;
-import com.example.moim.domain.MemberRepository;
-import com.example.moim.dto.HostRequest;
-import com.example.moim.dto.HostResponse;
-import com.example.moim.dto.ParticipantRequest;
-import com.example.moim.dto.ParticipantResponse;
+import com.example.moim.member.application.MemberService;
+import com.example.moim.member.domain.Gender;
+import com.example.moim.member.domain.Member;
+import com.example.moim.member.domain.MemberRepository;
+import com.example.moim.member.dto.HostRequest;
+import com.example.moim.member.dto.HostResponse;
+import com.example.moim.member.dto.ParticipantRequest;
+import com.example.moim.member.dto.ParticipantResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

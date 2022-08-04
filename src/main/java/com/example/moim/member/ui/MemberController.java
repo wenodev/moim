@@ -1,10 +1,10 @@
-package com.example.moim.ui;
+package com.example.moim.member.ui;
 
-import com.example.moim.application.MemberService;
-import com.example.moim.dto.HostRequest;
-import com.example.moim.dto.HostResponse;
-import com.example.moim.dto.ParticipantRequest;
-import com.example.moim.dto.ParticipantResponse;
+import com.example.moim.member.application.MemberService;
+import com.example.moim.member.dto.HostRequest;
+import com.example.moim.member.dto.HostResponse;
+import com.example.moim.member.dto.ParticipantRequest;
+import com.example.moim.member.dto.ParticipantResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

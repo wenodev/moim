@@ -1,7 +1,7 @@
-package com.example.moim.dto;
+package com.example.moim.member.dto;
 
-import com.example.moim.domain.Gender;
-import com.example.moim.domain.Member;
+import com.example.moim.member.domain.Gender;
+import com.example.moim.member.domain.Member;
 
 import java.time.LocalDate;
 

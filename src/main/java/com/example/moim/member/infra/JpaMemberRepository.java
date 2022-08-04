@@ -1,7 +1,7 @@
-package com.example.moim.infra;
+package com.example.moim.member.infra;
 
-import com.example.moim.domain.Member;
-import com.example.moim.domain.MemberRepository;
+import com.example.moim.member.domain.Member;
+import com.example.moim.member.domain.MemberRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface JpaMemberRepository extends MemberRepository, JpaRepository<Member, Long> {

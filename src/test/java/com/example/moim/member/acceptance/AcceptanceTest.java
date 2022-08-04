@@ -1,9 +1,9 @@
-package com.example.moim.acceptance;
+package com.example.moim.member.acceptance;
 
-import com.example.moim.acceptance.utils.DatabaseCleanup;
-import com.example.moim.domain.Gender;
-import com.example.moim.dto.HostRequest;
-import com.example.moim.dto.ParticipantRequest;
+import com.example.moim.utils.DatabaseCleanup;
+import com.example.moim.member.domain.Gender;
+import com.example.moim.member.dto.HostRequest;
+import com.example.moim.member.dto.ParticipantRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;

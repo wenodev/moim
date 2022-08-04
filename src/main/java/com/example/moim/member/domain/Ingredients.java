@@ -1,4 +1,4 @@
-package com.example.moim.domain;
+package com.example.moim.member.domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;

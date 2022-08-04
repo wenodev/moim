@@ -1,11 +1,10 @@
-package com.example.moim.domain;
+package com.example.moim.member.domain;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.util.List;
 

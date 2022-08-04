@@ -1,4 +1,4 @@
-package com.example.moim.acceptance.utils;
+package com.example.moim.utils;
 
 import com.google.common.base.CaseFormat;
 import org.springframework.beans.factory.InitializingBean;
