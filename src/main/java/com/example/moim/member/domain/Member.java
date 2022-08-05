@@ -2,15 +2,17 @@ package com.example.moim.member.domain;
 
 import com.example.moim.common.ErrorMessage;
 import com.example.moim.common.NotMatchException;
-import com.example.moim.member.dto.ParticipantRequest;
 import com.example.moim.utils.CipherGenerator;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,8 +28,12 @@ public class Member {
     private String email;
     private String company;
     private String introduction;
+
     @Embedded
     private Ingredients ingredients;
+
+    @OneToMany(mappedBy = "member", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    public List<MemberRole> memberRoles = new ArrayList<>();
 
     public static Member createHost(String name, LocalDate dateOfBirth, Gender gender, String userID,
                                     String password, String email, String company) {
@@ -48,6 +54,7 @@ public class Member {
         this.email = email;
         this.ingredients = new Ingredients(ingredients);
         this.introduction = introduction;
+        this.memberRoles.add(new MemberRole(this, Role.ROLE_PARTICIPANT));
     }
 
     public Member(String name, LocalDate dateOfBirth, Gender gender, String memberID,
@@ -59,6 +66,7 @@ public class Member {
         this.password = password;
         this.email = email;
         this.company = company;
+        this.memberRoles.add(new MemberRole(this, Role.ROLE_HOST));
     }
 
     public Member() {
