@@ -7,6 +7,7 @@ import com.example.moim.member.dto.HostRequest;
 import com.example.moim.member.dto.HostResponse;
 import com.example.moim.member.dto.ParticipantRequest;
 import com.example.moim.member.dto.ParticipantResponse;
+import com.example.moim.member.dto.RoleRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -36,9 +37,16 @@ public class MemberController {
     }
 
     @PutMapping("/members/participant/me")
-    public ResponseEntity<ParticipantResponse> updateParticipant(
+    public ResponseEntity updateParticipant(
             @AuthenticationPrincipal LoginMember loginMember, @RequestBody ParticipantRequest request) {
         memberService.updateParticipant(loginMember.getMemberId(), request);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/members/roles")
+    public ResponseEntity addRole(
+            @AuthenticationPrincipal LoginMember loginMember, @RequestBody RoleRequest request) {
+        memberService.addRole(loginMember.getMemberId(), request);
         return ResponseEntity.ok().build();
     }
 }

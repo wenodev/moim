@@ -8,6 +8,7 @@ import com.example.moim.member.dto.HostRequest;
 import com.example.moim.member.dto.HostResponse;
 import com.example.moim.member.dto.ParticipantRequest;
 import com.example.moim.member.dto.ParticipantResponse;
+import com.example.moim.member.dto.RoleRequest;
 import com.example.moim.utils.CipherGenerator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,5 +50,10 @@ public class MemberService {
         Member member = getByMemberId(memberId);
         member.updateParticipant(request.getName(), request.getDateOfBirth(), request.getGender(),
                 request.getEmail(), request.getIngredients(), request.getIntroduction());
+    }
+
+    public void addRole(String memberId, RoleRequest request) {
+        Member member = getByMemberId(memberId);
+        member.addRole(request.getRole());
     }
 }

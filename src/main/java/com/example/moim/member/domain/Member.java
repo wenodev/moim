@@ -1,5 +1,6 @@
 package com.example.moim.member.domain;
 
+import com.example.moim.common.DuplicateException;
 import com.example.moim.common.ErrorMessage;
 import com.example.moim.common.NotMatchException;
 import com.example.moim.utils.CipherGenerator;
@@ -126,5 +127,12 @@ public class Member {
         this.email = email;
         this.ingredients = new Ingredients(ingredients);
         this.introduction = introduction;
+    }
+
+    public void addRole(Role role) {
+        if (this.memberRoles.stream().anyMatch(r -> r.getRole().equals(role))) {
+            throw new DuplicateException(ErrorMessage.ROLE_DUPLICATE);
+        }
+        this.memberRoles.add(new MemberRole(role));
     }
 }

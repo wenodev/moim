@@ -1,16 +1,18 @@
 package com.example.moim.member.dto;
 
-public class RoleRequest {
-    private String role;
+import com.example.moim.member.domain.Role;
 
-    public RoleRequest(String role) {
+public class RoleRequest {
+    private Role role;
+
+    public RoleRequest(Role role) {
         this.role = role;
     }
 
     public RoleRequest() {
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 }

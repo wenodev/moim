@@ -3,6 +3,7 @@ package com.example.moim.member.acceptance;
 import com.example.moim.AcceptanceTest;
 import com.example.moim.auth.dto.TokenRequest;
 import com.example.moim.member.domain.Gender;
+import com.example.moim.member.domain.Role;
 import com.example.moim.member.dto.HostRequest;
 import com.example.moim.member.dto.ParticipantRequest;
 import com.example.moim.member.dto.RoleRequest;
@@ -92,7 +93,7 @@ public class MemberAcceptanceTest extends AcceptanceTest {
         TokenRequest tokenRequest = new TokenRequest("participant", "password");
         String accessToken = 토큰_요청(tokenRequest).jsonPath().getString("accessToken");
 
-        RoleRequest request = new RoleRequest("ROLE_HOST");
+        RoleRequest request = new RoleRequest(Role.ROLE_HOST);
 
         ExtractableResponse<Response> response = given().log().all()
                 .auth().oauth2(accessToken)

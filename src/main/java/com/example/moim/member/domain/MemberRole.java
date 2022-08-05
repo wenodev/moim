@@ -26,8 +26,16 @@ public class MemberRole {
     public MemberRole() {
     }
 
+    public MemberRole(Role role) {
+        this.role = role;
+    }
+
     public MemberRole(Member member, Role role) {
         this.member = member;
         this.role = role;
+    }
+
+    public Role getRole() {
+        return role;
     }
 }
