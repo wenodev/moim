@@ -6,6 +6,7 @@ import com.example.moim.member.domain.Member;
 import com.example.moim.member.domain.MemberRepository;
 import com.example.moim.member.dto.HostRequest;
 import com.example.moim.member.dto.HostResponse;
+import com.example.moim.member.dto.MemberResponse;
 import com.example.moim.member.dto.ParticipantRequest;
 import com.example.moim.member.dto.ParticipantResponse;
 import com.example.moim.member.dto.RoleRequest;
@@ -55,5 +56,10 @@ public class MemberService {
     public void addRole(String memberId, RoleRequest request) {
         Member member = getByMemberId(memberId);
         member.addRole(request.getRole());
+    }
+
+    public MemberResponse findMember(String memberId) {
+        Member member = getByMemberId(memberId);
+        return MemberResponse.of(member);
     }
 }

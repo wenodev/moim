@@ -5,10 +5,12 @@ import com.example.moim.auth.domain.LoginMember;
 import com.example.moim.member.application.MemberService;
 import com.example.moim.member.dto.HostRequest;
 import com.example.moim.member.dto.HostResponse;
+import com.example.moim.member.dto.MemberResponse;
 import com.example.moim.member.dto.ParticipantRequest;
 import com.example.moim.member.dto.ParticipantResponse;
 import com.example.moim.member.dto.RoleRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,5 +50,11 @@ public class MemberController {
             @AuthenticationPrincipal LoginMember loginMember, @RequestBody RoleRequest request) {
         memberService.addRole(loginMember.getMemberId(), request);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/members/me")
+    public ResponseEntity<MemberResponse> findMemberInfo(@AuthenticationPrincipal LoginMember loginMember) {
+        MemberResponse response = memberService.findMember(loginMember.getMemberId());
+        return ResponseEntity.ok().body(response);
     }
 }
