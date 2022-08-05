@@ -41,7 +41,7 @@ class AuthServiceTest {
                 "test-id", encodedPassword,
                 "weno@next.com", List.of("후추", "돼지고기"), "안녕하세요");
         given(memberService.getByMemberId(memberId)).willReturn(member);
-        given(jwtTokenProvider.createToken(request.getUserId())).willReturn(encodedPassword);
+        given(jwtTokenProvider.createToken(request.getMemberId())).willReturn(encodedPassword);
 
         TokenResponse response = authService.login(request);
 

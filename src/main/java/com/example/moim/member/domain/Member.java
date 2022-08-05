@@ -2,6 +2,7 @@ package com.example.moim.member.domain;
 
 import com.example.moim.common.ErrorMessage;
 import com.example.moim.common.NotMatchException;
+import com.example.moim.member.dto.ParticipantRequest;
 import com.example.moim.utils.CipherGenerator;
 
 import javax.persistence.Embedded;
@@ -107,5 +108,15 @@ public class Member {
         if (!this.password.equals(CipherGenerator.encode(password))) {
             throw new NotMatchException(ErrorMessage.PASSWORD_NOT_MATCH);
         }
+    }
+
+    public void updateParticipant(String name, LocalDate dateOfBirth, Gender gender,
+                                  String email, List<String> ingredients, String introduction) {
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.email = email;
+        this.ingredients = new Ingredients(ingredients);
+        this.introduction = introduction;
     }
 }

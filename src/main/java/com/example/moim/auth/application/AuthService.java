@@ -1,5 +1,6 @@
 package com.example.moim.auth.application;
 
+import com.example.moim.auth.domain.LoginMember;
 import com.example.moim.auth.dto.TokenRequest;
 import com.example.moim.auth.dto.TokenResponse;
 import com.example.moim.auth.infra.JwtTokenProvider;
@@ -20,10 +21,20 @@ public class AuthService {
     }
 
     public TokenResponse login(TokenRequest request) {
-        Member member = memberService.getByMemberId(request.getUserId());
+        Member member = memberService.getByMemberId(request.getMemberId());
         member.checkPassword(request.getPassword());
 
-        String token = jwtTokenProvider.createToken(request.getUserId());
+        String token = jwtTokenProvider.createToken(request.getMemberId());
         return new TokenResponse(token);
+    }
+
+    public LoginMember findMemberByToken(String credentials) {
+        if (!jwtTokenProvider.validateToken(credentials)) {
+            return LoginMember.guest();
+        }
+
+        String memberId = jwtTokenProvider.getPayload(credentials);
+        Member member = memberService.getByMemberId(memberId);
+        return new LoginMember(member.getMemberId());
     }
 }

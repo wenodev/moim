@@ -15,12 +15,12 @@ public class ParticipantRequest {
     private List<String> ingredients;
     private String introduction;
 
-    public ParticipantRequest(String name, LocalDate dateOfBirth, Gender gender, String userID, String password,
+    public ParticipantRequest(String name, LocalDate dateOfBirth, Gender gender, String memberId, String password,
                               String email, List<String> ingredients, String introduction) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
-        this.memberId = userID;
+        this.memberId = memberId;
         this.password = password;
         this.email = email;
         this.ingredients = ingredients;
@@ -28,11 +28,11 @@ public class ParticipantRequest {
     }
 
     public ParticipantRequest(String name, LocalDate dateOfBirth, Gender gender,
-                              String email, List<String> ingredients, String introduction) {
+                              String memberId, List<String> ingredients, String introduction) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
-        this.email = email;
+        this.memberId = memberId;
         this.ingredients = ingredients;
         this.introduction = introduction;
     }

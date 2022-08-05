@@ -32,9 +32,9 @@ public class AuthAcceptanceTest extends AcceptanceTest {
         );
         참여자_회원가입_요청(request);
 
-        String userId = "test-id";
+        String memberId = "test-id";
         String password = "test-password";
-        TokenRequest tokenRequest = new TokenRequest(userId, password);
+        TokenRequest tokenRequest = new TokenRequest(memberId, password);
 
         ExtractableResponse<Response> response = 토큰_요청(tokenRequest);
 

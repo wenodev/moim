@@ -44,4 +44,10 @@ public class MemberService {
         return memberRepository.findByMemberId(memberId)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.MEMBER_NOT_FOUND));
     }
+
+    public void updateParticipant(String memberId, ParticipantRequest request) {
+        Member member = getByMemberId(memberId);
+        member.updateParticipant(request.getName(), request.getDateOfBirth(), request.getGender(),
+                request.getEmail(), request.getIngredients(), request.getIntroduction());
+    }
 }

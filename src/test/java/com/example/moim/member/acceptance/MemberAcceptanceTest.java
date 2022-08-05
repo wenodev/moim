@@ -68,17 +68,17 @@ public class MemberAcceptanceTest extends AcceptanceTest {
 
         ParticipantRequest updateRequest = new ParticipantRequest(
                 "참여자1", LocalDate.now(), Gender.MALE,
-                "weno@next.com", List.of("후추", "돼지고기"), "안녕하세요");
+                "participant", List.of("후추", "돼지고기"), "안녕하세요");
 
         ExtractableResponse<Response> response = given().log().all()
                 .auth().oauth2(accessToken)
-                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(updateRequest)
-                .when().put("/members")
+                .when().put("/members/participant/me")
                 .then().log().all()
                 .extract();
 
-        assertThat(response.jsonPath().getString("name")).isEqualTo("참여자1");
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
 
     public static ExtractableResponse<Response> 주회자_회원가입_요청(HostRequest request) {
