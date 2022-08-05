@@ -36,14 +36,19 @@ public class AuthAcceptanceTest extends AcceptanceTest {
         String password = "test-password";
         TokenRequest tokenRequest = new TokenRequest(userId, password);
 
+        ExtractableResponse<Response> response = 토큰_요청(tokenRequest);
+
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.jsonPath().getString("accessToken")).isNotBlank();
+    }
+
+    public static ExtractableResponse<Response> 토큰_요청(TokenRequest tokenRequest) {
         ExtractableResponse<Response> response = given().log().all()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(tokenRequest)
                 .when().post("/login/token")
                 .then().log().all()
                 .extract();
-
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
-        assertThat(response.jsonPath().getString("accessToken")).isNotBlank();
+        return response;
     }
 }

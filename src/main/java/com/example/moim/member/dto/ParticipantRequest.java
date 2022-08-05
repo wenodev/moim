@@ -27,6 +27,16 @@ public class ParticipantRequest {
         this.introduction = introduction;
     }
 
+    public ParticipantRequest(String name, LocalDate dateOfBirth, Gender gender,
+                              String email, List<String> ingredients, String introduction) {
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.email = email;
+        this.ingredients = ingredients;
+        this.introduction = introduction;
+    }
+
     public ParticipantRequest() {
     }
 

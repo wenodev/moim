@@ -20,13 +20,13 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @PostMapping("/host")
+    @PostMapping("/members/host")
     public ResponseEntity<HostResponse> createHost(@RequestBody HostRequest request) {
         HostResponse response = memberService.createHost(request);
         return ResponseEntity.created(URI.create("/host/" + response.getId())).build();
     }
 
-    @PostMapping("/participant")
+    @PostMapping("/members/participant")
     public ResponseEntity<ParticipantResponse> createParticipant(@RequestBody ParticipantRequest request) {
         ParticipantResponse response = memberService.createParticipant(request);
         return ResponseEntity.created(URI.create("/participant/" + response.getId())).build();
