@@ -106,6 +106,26 @@ public class MemberAcceptanceTest extends AcceptanceTest {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
 
+    @Test
+    void 회원_정보_조회() {
+        ParticipantRequest participantRequest = new ParticipantRequest(
+                "참여자", LocalDate.now(), Gender.MALE, "participant",
+                "password", "weno@next.com", List.of("후추", "돼지고기"), "안녕하세요");
+        참여자_회원가입_요청(participantRequest);
+
+        TokenRequest tokenRequest = new TokenRequest("participant", "password");
+        String accessToken = 토큰_요청(tokenRequest).jsonPath().getString("accessToken");
+
+        ExtractableResponse<Response> response = given().log().all()
+                .auth().oauth2(accessToken)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when().get("/members/me")
+                .then().log().all()
+                .extract();
+
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
+
     public static ExtractableResponse<Response> 주회자_회원가입_요청(HostRequest request) {
         ExtractableResponse<Response> response = given().log().all()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
