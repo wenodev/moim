@@ -5,6 +5,7 @@ import com.example.moim.auth.dto.TokenRequest;
 import com.example.moim.member.domain.Gender;
 import com.example.moim.member.dto.HostRequest;
 import com.example.moim.member.dto.ParticipantRequest;
+import com.example.moim.member.dto.RoleRequest;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
@@ -75,6 +76,29 @@ public class MemberAcceptanceTest extends AcceptanceTest {
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(updateRequest)
                 .when().put("/members/participant/me")
+                .then().log().all()
+                .extract();
+
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
+
+    @Test
+    public void 역할_추가() {
+        ParticipantRequest participantRequest = new ParticipantRequest(
+                "참여자", LocalDate.now(), Gender.MALE, "participant",
+                "password", "weno@next.com", List.of("후추", "돼지고기"), "안녕하세요");
+        참여자_회원가입_요청(participantRequest);
+
+        TokenRequest tokenRequest = new TokenRequest("participant", "password");
+        String accessToken = 토큰_요청(tokenRequest).jsonPath().getString("accessToken");
+
+        RoleRequest request = new RoleRequest("ROLE_HOST");
+
+        ExtractableResponse<Response> response = given().log().all()
+                .auth().oauth2(accessToken)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(request)
+                .when().post("/members/roles")
                 .then().log().all()
                 .extract();
 
